@@ -36,6 +36,7 @@ defmodule Drunkscreencasts.Web do
 
       import Drunkscreencasts.Router.Helpers
       import Drunkscreencasts.Gettext
+      import Drunkscreencasts.Auth, only: [authenticate_user: 2]
     end
   end
 
@@ -58,6 +59,8 @@ defmodule Drunkscreencasts.Web do
   def router do
     quote do
       use Phoenix.Router
+
+      import Drunkscreencasts.Auth, only: [authenticate_user: 2]
     end
   end
 
