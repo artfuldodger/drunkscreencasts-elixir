@@ -19,9 +19,15 @@ defmodule Drunkscreencasts.Router do
 
     resources "/users", UserController, only: [:index, :show, :new, :create]
     resources "/sessions", SessionController, only: [:new, :create, :delete]
-    resources "/videos", VideoController
+    resources "/videos", VideoController, only: [:index, :show]
 
     get "/", PageController, :index
+  end
+
+  scope "/manage", Drunkscreencasts do
+    pipe_through [:browser, :authenticate_user]
+
+    resources "/videos", VideoController, only: [:new, :create, :edit, :update, :delete]
   end
 
   # Other scopes may use custom stacks.
